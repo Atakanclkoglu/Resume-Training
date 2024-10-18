@@ -1,3 +1,5 @@
+
+
 services:
   app:
     build:
@@ -5,6 +7,9 @@ services:
       dockerfile: Dockerfile
     env_file:
       - Course_Django_Project/docker.env
+    volumes:
+      - .:/srv/app
+      - static-data:/srv/app/static  # Statik dosyalar için bir volume
     ports:
       - "0.0.0.0:8000:8000"
     command: python manage.py runserver 0.0.0.0:8000
