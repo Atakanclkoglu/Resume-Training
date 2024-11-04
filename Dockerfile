@@ -26,5 +26,5 @@ RUN pip install -r /tmp/requirements.txt
 COPY . /srv/app
 WORKDIR /srv/app
 
-# Optional: Collect static files if using Django
-# RUN python manage.py collectstatic --noinput
+# Run the Django development server (this command will be run when the container starts)
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
