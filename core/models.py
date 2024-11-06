@@ -1,7 +1,27 @@
 from django.db import models
 
+
+class AbstractModel(models.Model):
+
+    updated_date = models.DateTimeField(
+        blank=True,
+        auto_now=True,
+        verbose_name='Updated Date',
+        help_text=''
+    )
+
+    created_date = models.DateTimeField(
+        blank=True,
+        auto_now_add=True,
+        verbose_name='Created Date',
+        help_text=''
+    )
+
+    class Meta:
+        abstract = True
+
 # Create your models here.
-class GeneralSetting(models.Model):
+class GeneralSetting(AbstractModel):
     name = models.CharField(
         default='',
         max_length=254,
@@ -27,20 +47,6 @@ class GeneralSetting(models.Model):
 
     )
 
-    updated_date = models.DateTimeField(
-        blank=True,
-        auto_now=True,
-        verbose_name='Updated Date',
-        help_text=''
-    )
-
-    created_date = models.DateTimeField(
-        blank=True,
-        auto_now_add=True,
-        verbose_name='Created Date',
-        help_text=''
-    )
-
     def __str__(self):
         return f'General Settings: {self.name}'
 
@@ -50,7 +56,7 @@ class GeneralSetting(models.Model):
         ordering = ('name',)
 
 
-class ImageSetting(models.Model):
+class ImageSetting(AbstractModel):
     name = models.CharField(
         default='',
         max_length=254,
@@ -75,19 +81,6 @@ class ImageSetting(models.Model):
         help_text=''
     )
 
-    updated_date = models.DateTimeField(
-        blank=True,
-        auto_now=True,
-        verbose_name='Updated Date',
-        help_text=''
-    )
-
-    created_date = models.DateTimeField(
-        blank=True,
-        auto_now_add=True,
-        verbose_name='Created Date',
-        help_text=''
-    )
 
 
     def __str__(self):
