@@ -10,7 +10,7 @@
 
                     <div class="media">
                         <div class="d-flex">
-                            <img src="{{ home_banner_image.url }}" alt="" style="width: 453px; height: 605px;"  >
+                            <img src="{{ home_banner_image.url }}" alt="" style="width: 453px; height: 605px;">
                         </div>
                         <div class="media-body">
                             <div class="personal_text">
@@ -19,9 +19,11 @@
                                 <h4>{{ home_banner_title }}</h4>
                                 <p>{{ home_banner_description }}</p>
                                 <ul class="list basic_info">
-                                    <li><a href="javascript:void(0)"><i class="lnr lnr-calendar-full"></i> 31st December, 1992</a></li>
+                                    <li><a href="javascript:void(0)"><i class="lnr lnr-calendar-full"></i> 31st
+                                        December, 1992</a></li>
                                     <li><a href="#"><i class="lnr lnr-phone-handset"></i> 44 (012) 6954 783</a></li>
-                                    <li><a href="mailto:businessplan@donald.com"><i class="lnr lnr-envelope"></i> businessplan@donald</a></li>
+                                    <li><a href="mailto:businessplan@donald.com"><i class="lnr lnr-envelope"></i>
+                                        businessplan@donald</a></li>
                                     <li><a href="#"><i class="lnr lnr-home"></i> Santa monica bullevard</a></li>
                                 </ul>
                                 <ul class="list personal_social">
@@ -58,13 +60,13 @@
                                     <h4>{{ skill.name }} <span class="counter">{{ skill.percentage }}</span>%</h4>
                                     <div class="progress_br">
                                         <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="{{ skill.percentage }}"
+                                            <div class="progress-bar" role="progressbar"
+                                                 aria-valuenow="{{ skill.percentage }}"
                                                  aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
                             {% endfor %}
-
 
 
                         </div>
@@ -92,42 +94,30 @@
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <ul class="list">
-                            <li>
-                                <span></span>
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <p>March 2017 to present</p>
+
+                            {% for experience in experiences %}
+                                <li>
+                                    <span></span>
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <p>{{ experience.start_date|date:"M Y" }} -
+                                                {% if experience.end_date %}
+                                                    {{ experience.end_date|date:"M Y" }}
+                                                {% else %}
+                                                    Present
+                                                {% endif %}
+
+                                            </p>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4>{{ experience.company_name }}</h4>
+                                            <p>{{ experience.job_title }} <br/>{{ experience.job_location }}</p>
+                                        </div>
                                     </div>
-                                    <div class="media-body">
-                                        <h4>Colorlib</h4>
-                                        <p>Senior Web Developer <br/>Santa monica, Los angeles</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <span></span>
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <p>March 2017 to present</p>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4>Colorlib</h4>
-                                        <p>Senior Web Developer <br/>Santa monica, Los angeles</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <span></span>
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <p>March 2017 to present</p>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4>Colorlib</h4>
-                                        <p>Senior Web Developer <br/>Santa monica, Los angeles</p>
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
+                            {% endfor %}
+
+
                         </ul>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
