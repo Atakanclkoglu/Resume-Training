@@ -1,7 +1,7 @@
 from lib2to3.fixes.fix_input import context
 
 from django.shortcuts import render
-from core.models import GeneralSetting, ImageSetting, Skill , Experience , Education
+from core.models import GeneralSetting, ImageSetting, Skill , Experience , Education , SocialMedia
 
 
 # Create your views here.
@@ -28,6 +28,8 @@ def index(request):
 
     educations = Education.objects.all().order_by('-start_date')
 
+    social_medias = SocialMedia.objects.all()
+
 
     context = {
         'site_title': site_title,
@@ -42,6 +44,7 @@ def index(request):
         'skills': skills,
         'experiences': experiences,
         'educations': educations,
+        'social_medias': social_medias,
     }
 
     return render(request, 'index.html',context=context)
