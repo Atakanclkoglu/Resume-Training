@@ -1,7 +1,7 @@
 from lib2to3.fixes.fix_input import context
 
 from django.shortcuts import render
-from core.models import GeneralSetting, ImageSetting, Skill , Experience
+from core.models import GeneralSetting, ImageSetting, Skill , Experience , Education
 
 
 # Create your views here.
@@ -26,6 +26,8 @@ def index(request):
 
     experiences = Experience.objects.all().order_by('-start_date')
 
+    educations = Education.objects.all().order_by('-start_date')
+
 
     context = {
         'site_title': site_title,
@@ -39,6 +41,7 @@ def index(request):
         'home_banner_image': home_banner_image,
         'skills': skills,
         'experiences': experiences,
+        'educations': educations,
     }
 
     return render(request, 'index.html',context=context)
