@@ -6,7 +6,10 @@ from core.models import GeneralSetting, ImageSetting, Skill, Experience, Educati
 
 # Create your views here.
 
-def index(request):
+def layout(request):
+
+    # DOCUMENTS
+    documents = Document.objects.all()  # Document queryset'ini ekleyin
 
     site_title = GeneralSetting.objects.get(name='site_title').parameter
     site_keywords = GeneralSetting.objects.get(name='site_keywords').parameter
@@ -17,24 +20,13 @@ def index(request):
     about_myself_welcome = GeneralSetting.objects.get(name='about_myself_welcome').parameter
     about_myself_footer = GeneralSetting.objects.get(name='about_myself_footer').parameter
 
-    #IMAGES
-    home_banner_image = ImageSetting.objects.get(name='home_banner_image').file
-
-
-    #SKILLS
-    skills = Skill.objects.all()
-
-    experiences = Experience.objects.all().order_by('-start_date')
-
-    educations = Education.objects.all().order_by('-start_date')
-
     social_medias = SocialMedia.objects.all()
 
-    # DOCUMENTS
-    documents = Document.objects.all()  # Document queryset'ini ekleyin
-
+    # IMAGES
+    home_banner_image = ImageSetting.objects.get(name='home_banner_image').file
 
     context = {
+        'documents': documents,
         'site_title': site_title,
         'site_keywords': site_keywords,
         'site_description': site_description,
@@ -44,11 +36,27 @@ def index(request):
         'about_myself_welcome': about_myself_welcome,
         'about_myself_footer': about_myself_footer,
         'home_banner_image': home_banner_image,
+        'social_medias': social_medias,
+
+    }
+    return context
+
+def index(request):
+
+
+    #SKILLS
+    skills = Skill.objects.all()
+
+    experiences = Experience.objects.all().order_by('-start_date')
+
+    educations = Education.objects.all().order_by('-start_date')
+
+
+
+    context = {
         'skills': skills,
         'experiences': experiences,
         'educations': educations,
-        'social_medias': social_medias,
-        'documents': documents,
     }
 
     return render(request, 'index.html',context=context)
