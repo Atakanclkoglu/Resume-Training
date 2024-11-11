@@ -2,10 +2,12 @@
 FROM python:3.10-slim
 
 # Update and install dependencies
-RUN apt-get update && \
-    apt-get install -y python3-dev build-essential && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update
+RUN apt-get install libpq-dev -y
+RUN apt-get install -y python3-dev build-essential
+RUN apt-get install postgresql-client -y
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/*
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
