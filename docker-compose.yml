@@ -23,7 +23,7 @@ services:
       - static-data:/srv/app/static  # Statik dosyalar için ayrı bir volume
     ports:
       - "8000:8000"
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn Course_Django_Project.wsgi:application --bind 0.0.0.0:8000
 
 volumes:
   postgresql-data:
