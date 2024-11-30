@@ -24,9 +24,15 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 ADD ./requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt
 
+COPY entrypoint.sh /srv/entrypoint.sh
+RUN sed -i 's/\r$//g' /srv/entrypoint.sh
+RUN chmod +x /srv/entrypoint.sh
+
 # Copy the application code
 COPY . /srv/app
 WORKDIR /srv/app
+
+ENTRYPOINT ["/srv/entrypoint.sh"]
 
 # Run the Django development server (this command will be run when the container starts)
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
