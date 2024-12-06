@@ -76,10 +76,18 @@ class ImageSetting(AbstractModel):
         help_text=''
     )
 
+    #file = models.FileField(
+    #    default='',
+    #    upload_to='images/',
+    #    blank=True,
+    #    verbose_name='Image',
+    #    help_text=''
+    #)
+
     file = models.FileField(
-        default='',
         upload_to='images/',
         blank=True,
+        null=True,  # `null=True` ile veritabanında boş bırakılmasına izin verilir.
         verbose_name='Image',
         help_text=''
     )
