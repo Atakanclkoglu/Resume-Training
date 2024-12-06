@@ -3,6 +3,8 @@ from tabnanny import verbose
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
+from Course_Django_Project.custom_storages import DocumentStorage, ImageSettingStorage
+
 
 class AbstractModel(models.Model):
 
@@ -76,16 +78,8 @@ class ImageSetting(AbstractModel):
         help_text=''
     )
 
-    #file = models.FileField(
-    #    default='',
-    #    upload_to='images/',
-    #    blank=True,
-    #    verbose_name='Image',
-    #    help_text=''
-    #)
-
     file = models.FileField(
-        upload_to='images/',
+        storage=ImageSettingStorage(),
         blank=True,
         null=True,  # `null=True` ile veritabanında boş bırakılmasına izin verilir.
         verbose_name='Image',
@@ -268,7 +262,7 @@ class Document(AbstractModel):
 
     file = models.FileField(
         default='',
-        upload_to='documents/',
+        storage=DocumentStorage(),
         blank=True,
         verbose_name='File',
         help_text=''
